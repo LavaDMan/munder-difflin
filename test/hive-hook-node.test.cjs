@@ -68,6 +68,12 @@ async function run(cmd, env) {
     const child = spawn('/bin/sh', ['-c', cmd], { env, stdio: ['pipe', 'pipe', 'pipe'] });
     let stderr = '';
     child.stderr.on('data', (d) => { stderr += d; });
+    // These commands are EXPECTED to exit before the payload lands — the control
+    // case below asserts `node "<shim>"` exits 127 under a stripped PATH. A child
+    // that is already gone makes this write EPIPE, and an unhandled 'error' on
+    // stdin rejects the test rather than the command under test failing. The exit
+    // code is what this helper reports, so a lost write is not a lost signal.
+    child.stdin.on('error', () => { /* child exited before reading stdin */ });
     child.stdin.end(JSON.stringify({ hook_event_name: 'Stop', session_id: 's1' }));
     child.on('close', (code) => resolve({ code, stderr }));
   });
