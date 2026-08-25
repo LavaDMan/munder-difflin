@@ -222,8 +222,12 @@ export async function startWebBridge(opts: WebBridgeOptions): Promise<WebBridgeH
     // First hit carries the token in the query; park it in a cookie so the
     // asset requests that follow do not each need it in the URL.
     if (url.searchParams.get('t')) {
+      // Persist for 30 days so the token URL is needed ONCE per browser, not
+      // once per browser session. HttpOnly keeps it out of reach of page
+      // scripts; SameSite=Strict means another site cannot cause a request
+      // that carries it.
       res.setHeader('set-cookie',
-        `cthweb=${encodeURIComponent(token)}; Path=/; HttpOnly; SameSite=Strict`);
+        `cthweb=${encodeURIComponent(token)}; Path=/; Max-Age=2592000; HttpOnly; SameSite=Strict`);
     }
 
     if (path === '/__cth-host.js') {
