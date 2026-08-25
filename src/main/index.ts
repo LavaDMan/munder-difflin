@@ -2200,6 +2200,68 @@ ipcMain.handle('hire:drainPending', () => {
 
 // IPC: "import hires…" file picker in the Add-Agent modal. Every selected file
 // is validated independently; valid neighbours survive an invalid manifest.
+/**
+ * Server-side hire-manifest discovery, for the WEB DOOR.
+ *
+ * `hire:openFile` below opens a NATIVE Electron dialog. Over the browser bridge
+ * that dialog renders on the SERVER's virtual display, where the person cannot
+ * see or click it — the button simply appears dead. And a browser <input
+ * type=file> would be the wrong fix: it uploads from the VIEWER's machine,
+ * while hire manifests live on the machine the hive runs on.
+ *
+ * So the web path lists candidates from the server and imports by absolute
+ * path. Scanned locations are deliberately hive-scoped, not the whole disk.
+ */
+ipcMain.handle('hire:listServer', () => {
+  const home = readConfig().harnessHome;
+  if (!home) return { ok: false, files: [], error: 'no harness config open' };
+  const roots = [
+    join(home, 'hive', 'personas'),
+    join(home, 'hive', 'research', 'hires'),
+    join(home, 'hires')
+  ];
+  const files: Array<{ path: string; name: string; size: number; mtime: number; dir: string }> = [];
+  for (const dir of roots) {
+    let names: string[] = [];
+    try { names = readdirSync(dir); } catch { continue; }   // absent dir is not an error
+    for (const n of names) {
+      if (!n.toLowerCase().endsWith('.json')) continue;
+      const full = join(dir, n);
+      try {
+        const st = statSync(full);
+        if (!st.isFile()) continue;
+        files.push({ path: full, name: n, size: st.size, mtime: st.mtimeMs, dir });
+      } catch { /* unreadable entry — skip it rather than fail the listing */ }
+    }
+  }
+  files.sort((a, b) => b.mtime - a.mtime);
+  return { ok: true, files, roots };
+});
+
+/** Import hire manifests BY PATH (the web door's picker hands these back).
+ *  Every path is re-validated through the same reader the native dialog uses,
+ *  and confined to the scanned roots so a crafted path cannot read elsewhere. */
+ipcMain.handle('hire:importPaths', (_evt, paths: unknown) => {
+  const home = readConfig().harnessHome;
+  if (!home) return { ok: false, manifests: [], errors: [], error: 'no harness config open' };
+  const roots = [
+    join(home, 'hive', 'personas'),
+    join(home, 'hive', 'research', 'hires'),
+    join(home, 'hires')
+  ].map((r) => resolve(r) + sep);
+  const list = Array.isArray(paths) ? paths.filter((p): p is string => typeof p === 'string') : [];
+  // Containment: resolve first, then require the result to sit under a scanned
+  // root. Without this, `../../` in a path reaches anything the app can read.
+  const safe = list.filter((p) => { const r = resolve(p); return roots.some((root) => r.startsWith(root)); });
+  if (safe.length === 0) return { ok: false, manifests: [], errors: [], error: 'no importable paths' };
+  const batch = readHireManifestFiles(safe);
+  return {
+    ok: batch.manifests.length > 0,
+    ...batch,
+    error: batch.manifests.length === 0 ? 'no valid hire manifests selected' : undefined
+  };
+});
+
 ipcMain.handle('hire:openFile', async () => {
   const res = await dialog.showOpenDialog({
     title: 'Import hire manifests',

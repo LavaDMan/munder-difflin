@@ -929,6 +929,20 @@ const api = {
     error?: string;
   }> =>
     ipcRenderer.invoke('hire:openFile'),
+  /** WEB DOOR: list hire manifests that live on the SERVER. The native dialog
+   *  used by importHireFiles() renders on the server's display, which a browser
+   *  client cannot see, and a browser file input would upload from the wrong
+   *  machine entirely. */
+  listServerHires: (): Promise<{
+    ok: boolean;
+    files: Array<{ path: string; name: string; size: number; mtime: number; dir: string }>;
+    roots?: string[];
+    error?: string;
+  }> => ipcRenderer.invoke('hire:listServer'),
+  /** WEB DOOR: import server-side manifests by absolute path (from the list above). */
+  importServerHires: (paths: readonly string[]): Promise<{
+    ok: boolean; manifests: HireManifest[]; errors: string[]; error?: string;
+  }> => ipcRenderer.invoke('hire:importPaths', paths),
 
   // ─── Quit confirmation ───────────────────────────────────────────────────
   onCloseRequested: (cb: (info: { ptyCount: number }) => void): (() => void) => {

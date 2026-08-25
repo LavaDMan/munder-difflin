@@ -364,8 +364,41 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
     if (!next) onClose();
   };
 
+  /** True when this renderer is served over the web bridge rather than running
+   *  inside Electron. A native file dialog would open on the SERVER's display,
+   *  invisible to the person in the browser, so the import button offers a
+   *  server-side picker instead. */
+  const isWeb = typeof (globalThis as { __CTH_WEB__?: boolean }).__CTH_WEB__ !== 'undefined';
+  const [serverHires, setServerHires] = useState<
+    Array<{ path: string; name: string; size: number; mtime: number; dir: string }> | null
+  >(null);
+
+  /** Web door: list the manifests that live on the machine the hive runs on. */
+  const browseServerHires = async () => {
+    setError(undefined);
+    const res = await window.cth.listServerHires();
+    if (!res.ok) { setError(res.error ?? 'could not list server hires'); return; }
+    if (res.files.length === 0) {
+      setError('No .json hire manifests found on the server under: ' + (res.roots ?? []).join(' / '));
+      setServerHires([]);
+      return;
+    }
+    setServerHires(res.files);
+  };
+
+  /** Web door: import the manifest the person picked from that list. */
+  const importServerHire = async (path: string) => {
+    setError(undefined);
+    setServerHires(null);
+    const res = await window.cth.importServerHires([path]);
+    if (res.manifests.length > 0) enqueuePendingHires(res.manifests);
+    if (res.errors.length > 0) setError('Skipped: ' + res.errors.join(' / '));
+    else if (!res.ok && res.error) setError(res.error);
+  };
+
   const importHire = async () => {
     setError(undefined);
+    if (isWeb) { void browseServerHires(); return; }
     const res = await window.cth.importHireFiles();
     if (res.manifests.length > 0) enqueuePendingHires(res.manifests);
     if (res.errors.length > 0) {
@@ -1134,6 +1167,47 @@ export function AddAgentModal({ onClose, config, onConfigChange }: AddAgentModal
                 </div>
               )}
             </div>
+
+            {serverHires && serverHires.length > 0 && (
+              <div style={{
+                marginTop: 8, padding: 8,
+                background: 'var(--cth-paper-100)',
+                boxShadow: 'inset 0 0 0 1px var(--cth-ink-300)',
+                maxHeight: 220, overflowY: 'auto'
+              }}>
+                <div style={{ fontSize: 12, color: 'var(--cth-ink-500)', marginBottom: 6 }}>
+                  Manifests on the server &mdash; pick one to load into the form:
+                </div>
+                {serverHires.map((f) => (
+                  <button
+                    key={f.path}
+                    onClick={() => { void importServerHire(f.path); }}
+                    disabled={busy}
+                    title={f.path}
+                    style={{
+                      display: 'block', width: '100%', textAlign: 'left',
+                      padding: '6px 8px', marginBottom: 4, cursor: 'pointer',
+                      background: 'var(--cth-paper-000)',
+                      boxShadow: 'inset 0 0 0 1px var(--cth-ink-300)',
+                      border: 'none', color: 'var(--cth-ink-900)',
+                      fontFamily: 'var(--cth-font-ui)', fontSize: 13
+                    }}
+                  >
+                    {f.name}
+                    <span style={{ color: 'var(--cth-ink-500)', fontSize: 11 }}>
+                      {' \u00b7 '}{f.dir}
+                    </span>
+                  </button>
+                ))}
+                <button
+                  onClick={() => setServerHires(null)}
+                  style={{
+                    marginTop: 2, background: 'none', border: 'none', cursor: 'pointer',
+                    color: 'var(--cth-ink-500)', fontSize: 12, padding: 0
+                  }}
+                >cancel</button>
+              </div>
+            )}
 
             <div style={{ display: 'flex', gap: 8, justifyContent: 'flex-end', marginTop: 4 }}>
               <PixelButton

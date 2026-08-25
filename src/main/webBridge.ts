@@ -234,9 +234,12 @@ export async function startWebBridge(opts: WebBridgeOptions): Promise<WebBridgeH
       // Minimal `process` stand-in carrying the SERVER's identity. Generated
       // live rather than baked at build time so it cannot go stale or describe
       // the wrong machine.
+      // Also flags web mode, so the renderer can offer a SERVER-side file
+      // picker where a native Electron dialog would render on the server's
+      // display and be invisible to the person in the browser.
       const body = `globalThis.process = Object.assign(globalThis.process || {}, `
         + JSON.stringify({ platform: process.platform, arch: process.arch })
-        + `);\n`;
+        + `);\nglobalThis.__CTH_WEB__ = true;\n`;
       res.writeHead(200, { 'content-type': MIME['.js'], 'cache-control': 'no-store' });
       res.end(body);
       return;
