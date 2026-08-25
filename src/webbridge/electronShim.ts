@@ -100,8 +100,41 @@ function connect(): void {
 }
 connect();
 
+/**
+ * Clipboard is the one place the server's answer is the WRONG answer.
+ *
+ * `app:copyToClipboard` / `app:readClipboard` run Electron's `clipboard` in the
+ * main process, which is the clipboard of the machine Munder runs ON. Over the
+ * web door the person is somewhere else entirely, so a copy would vanish onto a
+ * headless server and a paste would deliver whatever that server last held.
+ * These two are answered locally instead.
+ *
+ * SECURE CONTEXT CAVEAT: `navigator.clipboard` is only available on https or
+ * http://localhost. Reached over plain http on a LAN IP the page is NOT a
+ * secure context and `navigator.clipboard` is undefined — read returns '' and
+ * the caller takes its empty branch. Through the SSH tunnel on 127.0.0.1 it
+ * works. That difference is a real cost of binding to the LAN over http.
+ */
+const CLIPBOARD_WRITE = 'app:copyToClipboard';
+const CLIPBOARD_READ = 'app:readClipboard';
+
+async function localClipboard(channel: string, args: unknown[]): Promise<unknown> {
+  const nav = (globalThis as { navigator?: { clipboard?: {
+    writeText(t: string): Promise<void>; readText(): Promise<string>;
+  } } }).navigator;
+  if (channel === CLIPBOARD_WRITE) {
+    const text = String(args[0] ?? '');
+    try { await nav?.clipboard?.writeText(text); } catch { /* denied or insecure */ }
+    return undefined;
+  }
+  try { return (await nav?.clipboard?.readText()) ?? ''; } catch { return ''; }
+}
+
 export const ipcRenderer = {
   async invoke(channel: string, ...args: unknown[]): Promise<unknown> {
+    if (channel === CLIPBOARD_WRITE || channel === CLIPBOARD_READ) {
+      return localClipboard(channel, args);
+    }
     await ready;
     const s = sock;
     if (!s || s.readyState !== WebSocket.OPEN) throw new Error('bridge not connected');
@@ -120,8 +153,20 @@ export const ipcRenderer = {
     });
   },
 
-  /** See syncCache above: cannot cross a WebSocket, served from the snapshot. */
+  /**
+   * Served from the connect-time snapshot — EXCEPT the clipboard.
+   *
+   * `terminalPool.ts` does:
+   *     const text = window.cth.readClipboardSync?.();
+   *     if (typeof text === 'string') { if (text) term.paste(text); return; }
+   * A snapshot value is a string, so returning one makes that branch RETURN and
+   * the async fallback below it never runs — paste becomes a silent no-op, or
+   * worse pastes the server's clipboard from whenever the socket connected.
+   * Returning undefined is what lets it fall through to `readClipboard()`,
+   * which this shim answers from the viewer's own clipboard.
+   */
   sendSync(channel: string): unknown {
+    if (channel === 'app:readClipboardSync') return undefined;
     return channel in syncCache ? syncCache[channel] : null;
   },
 

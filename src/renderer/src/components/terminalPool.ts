@@ -242,8 +242,14 @@ export function acquireTerminal(ptyId: string, theme?: ThemeMap, fontSize = 14):
   const pasteClipboard = (): void => {
     if (entry.exited) return;
     try {
+      // Truthy, not `typeof === 'string'`: the bridge guarantees a string
+      // (`sendSync(...) ?? ''`), so a type check ALWAYS takes this branch and
+      // the async fallback below can never run. Over the web bridge the sync
+      // channel cannot cross a socket and yields '', which made paste a silent
+      // no-op. Falling through on empty costs one extra IPC on a genuinely
+      // empty clipboard and keeps the dictation race closed on a full one.
       const text = window.cth.readClipboardSync?.();
-      if (typeof text === 'string') { if (text) term.paste(text); return; }
+      if (text) { term.paste(text); return; }
     } catch { /* fall through to the async path */ }
     void window.cth.readClipboard().then((t) => { if (t) term.paste(t); });
   };
