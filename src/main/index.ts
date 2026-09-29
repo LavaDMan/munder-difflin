@@ -1,3 +1,8 @@
+// FIRST import, deliberately: webBridge patches ipcMain.handle/.on at module
+// load to record every channel, and a handler registered before the tap is
+// installed would be invisible to the browser client. Import order is the
+// contract here.
+import { startWebBridge, teeWebContents } from './webBridge';
 import { app, BrowserWindow, clipboard, dialog, ipcMain, Menu, powerMonitor, powerSaveBlocker, screen, shell, Notification } from 'electron';
 import { spawn } from 'node:child_process';
 import {
@@ -2267,6 +2272,9 @@ function createWindow(opts: { floor?: boolean } = {}): BrowserWindow {
   // primary. The primary is also seeded synchronously so boot events route now.
   win.on('focus', () => { mainWindow = win; });
   if (!isFloor) mainWindow = win;
+  // Mirror this window's pushes to any browser client. Idempotent, and a no-op
+  // when the web bridge is not running.
+  if (!isFloor) { try { teeWebContents(wc); } catch (e) { console.error('[web] tee failed:', e); } }
 
   // Permission gate for the renderer (our own trusted, local content). The only
   // permission we constrain is microphone capture: it's allowed ONLY while a mic
@@ -5140,6 +5148,29 @@ app.whenReady().then(() => {
   // off, the app keeps Electron's default menu — zero behavior change.
   if (readConfig().multiWindow) installAppMenu();
   createWindow();
+
+  // ─── the browser door (opt-in, env-gated) ─────────────────────────────────
+  // Serves the SAME built renderer to a browser over the SAME ipcMain handlers.
+  // Env-gated rather than config-gated so shipped defaults are untouched: with
+  // MUNDER_WEB_PORT unset this is dead code and the app behaves exactly as
+  // before. Loopback only — see the security note in webBridge.ts; reach it
+  // from another machine over an SSH tunnel, never by binding 0.0.0.0.
+  const webPort = Number(process.env.MUNDER_WEB_PORT ?? '');
+  if (Number.isInteger(webPort) && webPort > 0) {
+    void startWebBridge({
+      rendererDir: join(__dirname, '../renderer'),
+      bridgeFile: join(__dirname, '../web/cth-bridge.js'),
+      port: webPort,
+      host: process.env.MUNDER_WEB_HOST || '127.0.0.1',
+      token: process.env.MUNDER_WEB_TOKEN || undefined,
+      webContents: mainWindow?.webContents ?? null
+    }).then((h) => {
+      console.log('[web] browser door open:', h.url);
+    }).catch((e) => {
+      console.error('[web] failed to start:', e);
+    });
+  }
+
   // Auto-start the Slack webhook server when configured. Best-effort: a tunnel
   // failure (offline) is logged, not fatal. The tunnel URL is ephemeral and
   // changes per restart, so the user re-pastes it via Settings → Start.

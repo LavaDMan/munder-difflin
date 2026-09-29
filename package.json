@@ -12,7 +12,7 @@
   },
   "scripts": {
     "dev": "electron-vite dev",
-    "build": "electron-vite build && npm run copy:main-assets",
+    "build": "electron-vite build && npm run copy:main-assets && npm run build:web",
     "copy:main-assets": "node tools/copy-main-assets.cjs",
     "preview": "electron-vite preview",
     "postinstall": "electron-rebuild -f && node tools/ensure-pty-perms.cjs && node tools/patch-node-pty-conpty.cjs",
@@ -24,7 +24,8 @@
     "dist": "npm run build && electron-builder",
     "dist:mac": "npm run build && electron-builder --mac",
     "dist:win": "npm run build && electron-builder --win",
-    "dist:linux": "npm run build && electron-builder --linux"
+    "dist:linux": "npm run build && electron-builder --linux",
+    "build:web": "vite build --config vite.web.config.ts"
   },
   "dependencies": {
     "@codemirror/lang-css": "^6.3.1",
@@ -58,6 +59,7 @@
     "react-markdown": "^10.1.0",
     "remark-gfm": "^4.0.1",
     "tunnelmole": "^2.4.0",
+    "ws": "^8.21.3",
     "zustand": "^4.5.5"
   },
   "devDependencies": {
@@ -68,6 +70,7 @@
     "@types/node": "^22.7.5",
     "@types/react": "^18.3.11",
     "@types/react-dom": "^18.3.0",
+    "@types/ws": "^8.18.1",
     "@vitejs/plugin-react": "^4.3.2",
     "electron": "^32.2.0",
     "electron-builder": "^25.1.8",
