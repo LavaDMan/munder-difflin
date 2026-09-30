@@ -42,8 +42,12 @@ export function codexRemoteEndpoint(shortHome: string): string {
   return `unix://${join(shortHome, CODEX_REMOTE_SOCKET_RELATIVE)}`;
 }
 
-/** Global options must precede `resume`, so prepend the endpoint in all cases. */
-export function withCodexRemoteArgs(args: string[], endpoint: string): string[] {
-  if (args.includes('--remote')) return args;
-  return ['--remote', endpoint, ...args];
+/** The remote server does not inherit the TUI's cwd. Send the working root
+ * explicitly for both new and resumed threads. Preserve an explicit CLI root.
+ * Global options must precede `resume`.
+ */
+export function withCodexRemoteArgs(args: string[], endpoint: string, cwd?: string): string[] {
+  const hasCwd = args.some(a => a === '--cd' || a === '-C' || a.startsWith('--cd=') || a.startsWith('-C'));
+  const workingRoot = cwd && !hasCwd ? ['--cd', cwd] : [];
+  return [...(args.includes('--remote') ? [] : ['--remote', endpoint]), ...workingRoot, ...args];
 }

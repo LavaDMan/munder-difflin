@@ -217,7 +217,7 @@ async function enableCodexRemoteForSpawn(
       return false;
     }
     opts.env = { ...(opts.env ?? {}), CODEX_HOME: alias };
-    opts.args = withCodexRemoteArgs(opts.args ?? [], codexRemoteEndpoint(alias));
+    opts.args = withCodexRemoteArgs(opts.args ?? [], codexRemoteEndpoint(alias), opts.cwd);
     return true;
   } catch (e) {
     console.warn('[codex-remote] setup failed; starting local TUI:',
@@ -1164,14 +1164,9 @@ function runBreakerBeat(progressWindowMs: number): void {
     // (aggregateLive picks the most-recent live session id), so this gates on
     // "is there a live session" without changing any live-agent behavior.
     if (sample?.sessionId) hive.appendCostLedger(sample); // ledger covers everyone incl. god
-    // Second source for the resume key. recordSession() is otherwise reachable
-    // ONLY from the hook shim, so any window where hooks don't land leaves the
-    // registry with no sessionId and "Restart & Continue" refuses to continue —
-    // while this very sample proves the app knew the live session id all along
-    // (it was already being written to the cost ledger one line above). Same id,
-    // same liveness gate; recordSession writes only on change, so this is a
-    // no-op once the hooks are flowing.
-    if (sample?.sessionId) hive.recordSession(id, sample.sessionId);
+    // Usage attribution is not a resume identity: aggregateLive selects the
+    // latest accounting session, including CLI bootstrap and auxiliary sessions.
+    // Only lifecycle hooks may update the parent's durable resume key.
     if (id === reg.godId) continue;            // breaker skips god
     // Progress = fresh coordination files OR a recent OTel tool span. The span
     // leg closes the background-work blind spot: subagent/Workflow tool calls

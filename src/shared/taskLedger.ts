@@ -85,3 +85,11 @@ export function patchTaskInLedger(
   const list = Array.isArray(rawTasks) ? rawTasks : [];
   return list.map((entry) => (idOf(entry) === id ? { ...(entry as RawTask), ...patch } : entry));
 }
+
+/** Shared by ASK ME and extracts: history entries are not new decisions.
+ * Dispositions are explicit scribe/operator classifications, never NLP guesses.
+ * Unknown values remain open so a typo cannot silently hide a real blocker. */
+export function isOpenHumanQuestion(entry: {q?: unknown; a?: unknown; dismissedAt?: unknown; disposition?: unknown}): boolean {
+  return typeof entry.q === 'string' && !entry.a && !entry.dismissedAt &&
+    !['withdrawn', 'superseded', 'fyi'].includes(String(entry.disposition));
+}

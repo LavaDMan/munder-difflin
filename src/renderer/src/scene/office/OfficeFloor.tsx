@@ -1,3 +1,4 @@
+import { isOpenHumanQuestion } from '@shared/taskLedger';
 import { useEffect, useRef, useState } from 'react';
 import { Application, Container, Graphics, Ticker, Texture } from 'pixi.js';
 // PixiJS uses new Function() internally, blocked by Electron CSP — this patches it.
@@ -1317,7 +1318,7 @@ export function OfficeFloor() {
           const newAsk = arr.filter((t) =>
             String(t?.status) === 'blocked'
             && Array.isArray(t?.humanQA)
-            && t!.humanQA!.some((e) => e && typeof e.q === 'string' && !e.a)
+            && t!.humanQA!.some((e) => e && isOpenHumanQuestion(e))
           ).length;
           if (newAsk !== askCount) {
             askCount = newAsk;

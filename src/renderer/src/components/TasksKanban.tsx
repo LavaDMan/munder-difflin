@@ -1,3 +1,4 @@
+import { isOpenHumanQuestion } from '@shared/taskLedger';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { PixelPanel } from './PixelPanel';
 import { PixelButton } from './PixelButton';
@@ -10,6 +11,8 @@ import { useStore } from '@/store/store';
  *  (same convention as store/config.ts). */
 export interface HumanQA {
   q: string;
+  disposition?: string;
+  decisionRef?: string;
   a?: string;
   askedAt?: string;
   answeredAt?: string;
@@ -39,7 +42,7 @@ export function openQuestion(t: HiveTask): HumanQA | undefined {
   if (!Array.isArray(t.humanQA)) return undefined;
   for (let i = t.humanQA.length - 1; i >= 0; i--) {
     const e = t.humanQA[i];
-    if (e && typeof e.q === 'string' && !e.a && !e.dismissedAt) return e;
+    if (e && isOpenHumanQuestion(e)) return e;
   }
   return undefined;
 }
@@ -97,6 +100,8 @@ export function parseTasks(raw: unknown): HiveTask[] {
           .filter((e): e is Record<string, unknown> => !!e && typeof e === 'object' && typeof (e as { q?: unknown }).q === 'string')
           .map((e) => ({
             q: e.q as string,
+            disposition: typeof e.disposition === 'string' ? e.disposition : undefined,
+            decisionRef: typeof e.decisionRef === 'string' ? e.decisionRef : undefined,
             a: typeof e.a === 'string' ? e.a : undefined,
             askedAt: typeof e.askedAt === 'string' ? e.askedAt : undefined,
             answeredAt: typeof e.answeredAt === 'string' ? e.answeredAt : undefined,

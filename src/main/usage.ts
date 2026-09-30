@@ -38,7 +38,7 @@ import { readAgentUsage } from './transcript';
  *  never a raw OTel record. */
 export interface AgentUsageSample {
   agentId: string;
-  /** Doubles as the #6.6a --resume key AND the cost accounting/dedup key. */
+  /** Cost accounting/dedup attribution only; not an authoritative parent resume key. */
   sessionId: string | null;
   ts: number;
   input: number;

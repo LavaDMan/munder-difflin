@@ -104,3 +104,13 @@ test('main and renderer split with the SAME tokenizer (shared module)', () => {
   // renderer's. One example locks the routing through the shared function.
   assert.deepEqual(tokenizeCommand(`a "b c" 'd e' f`), ['a', 'b c', 'd e', 'f']);
 });
+
+test('provider-only request selects its executable instead of the floor default', () => {
+ const l = launch({requestProvider:'codex', defaultCommand:'claude', autoMode:true});
+ assert.equal(l.bin, 'codex');
+ assert.deepEqual(l.args,['--dangerously-bypass-approvals-and-sandbox']);
+});
+test('matching explicit provider preserves configured model and permission choices',()=>{
+ const l=launch({requestProvider:'claude',defaultCommand:'claude --model opus --permission-mode bypassPermissions',autoMode:false});
+ assert.deepEqual(l.args,['--model','opus','--permission-mode','bypassPermissions']);
+});

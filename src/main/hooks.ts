@@ -165,10 +165,6 @@ export class HookServer {
       return { continue: false, stopReason: 'Halted by the operator from the floor.' };
     }
 
-    // Capture the Claude Code session id for idempotent --resume + cost dedup
-    // (Lane A #6.6a). Cheap: recordSession writes only when it changes.
-    if (agentId && p.session_id) this.hive.recordSession(agentId, p.session_id);
-
     // CostSample — synthesized by the proxy-bridge sidecar (qwen) on every
     // response with usage. Persist it to the SAME cost ledger as Claude's OTel
     // path, keyed by the synthesized session_id, then return early so cost stays
@@ -200,6 +196,10 @@ export class HookServer {
       }
       return {};
     }
+
+    // Capture the Claude Code session id for idempotent --resume + cost dedup
+    // (Lane A #6.6a). Cheap: recordSession writes only when it changes.
+    if (agentId && p.session_id) this.hive.recordSession(agentId, p.session_id);
 
     // Feed the breaker its hook-derived loop signal: a tool that actually ran.
     // A repeated identical (name+input) PostToolUse is the runaway-loop tell.
