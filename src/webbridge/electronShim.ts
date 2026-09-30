@@ -35,7 +35,7 @@ const pending = new Map<number, { resolve: (v: unknown) => void; reject: (e: Err
 const listeners = new Map<string, Set<Listener>>();
 
 /**
- * Values for the two `sendSync` channels, pushed by the server at connect.
+ * Values for the `sendSync` channels, pushed by the server at connect.
  *
  * `sendSync` is synchronous by definition and a WebSocket is not, so it cannot
  * be forwarded. Both call sites in the preload already degrade gracefully

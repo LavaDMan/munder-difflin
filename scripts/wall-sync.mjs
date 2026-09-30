@@ -30,7 +30,8 @@ const DRY = process.env.DRY_RUN === "1";
 const PR_BRANCH = "wall/additions";
 
 // Same scope filter as the dashboard collector: the engraving-notes key is the
-// discriminator for wall payments; the date guards against ~9,800 legacy records.
+// discriminator for wall payments; the date guards against the much larger body
+// of legacy records that predates the wall.
 // Epoch is Aug 13 UTC because the first wall payment is 2026-08-13T19:xx UTC
 // (= Aug 14 IST, the wall's listed date).
 const MD_EPOCH = Math.floor(Date.parse("2026-08-13T00:00:00Z") / 1000);

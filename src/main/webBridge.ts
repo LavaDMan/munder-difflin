@@ -104,11 +104,14 @@ export function teeWebContents(wc: WebContents): void {
 }
 
 // ─── the sendSync snapshot ───────────────────────────────────────────────────
-// Two preload methods use ipcRenderer.sendSync, which cannot cross a socket.
-// Both already degrade (readClipboardSync -> '', rosterReadSync -> null, after
-// which the caller falls back to localStorage), so we do better than the
-// fallback: run those handlers server-side at connect and ship the values.
-const SYNC_CHANNELS = ['app:readClipboardSync', 'roster:readSync'];
+// Preload methods that use ipcRenderer.sendSync, which cannot cross a socket.
+// Each degrades on its own (readClipboardSync -> '', rosterReadSync -> null,
+// harnessHomeSync -> null), but null is not harmless for every one of them:
+// the roster reads harnessHome to decide whether localStorage belongs to the
+// hive being opened, and null means "adopt it". So run these handlers
+// server-side at connect and ship the values. A sendSync channel missing here
+// fails test/web-door-sync-channels.test.cjs.
+const SYNC_CHANNELS = ['app:readClipboardSync', 'roster:readSync', 'config:homeSync'];
 
 function syncSnapshot(sender: WebContents | null): Record<string, unknown> {
   const out: Record<string, unknown> = {};

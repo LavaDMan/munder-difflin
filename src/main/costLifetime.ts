@@ -10,8 +10,9 @@
  * our accumulator forgot). Every consumer that reads the LAST value therefore
  * understates spend for any agent that has been through a restart.
  *
- * Measured on the live ledger 2026-08-21: 38 such resets, last-value total
- * $987.04 against a true $2,406.64, i.e. 59% of spend invisible.
+ * Measured on a live ledger with dozens of such resets, the last value hid
+ * 59% of real spend. The shortfall scales with how often the app is restarted,
+ * so a long-running floor is affected worse than a fresh one.
  *
  * THE RECOVERY
  * ────────────
@@ -22,18 +23,18 @@
  *     sum(peak of each closed segment) + peak of the open segment
  *
  * Any decrease counts, with only a float-noise epsilon. A dollar threshold was
- * considered and rejected: two genuine restarts in the live ledger drop from
- * $0.92 and $0.73 straight to $0.00, and a $1 threshold silently misses both.
- * A cumulative counter has no legitimate reason to go down, so the magic number
- * bought nothing and cost coverage.
+ * considered and rejected: real restarts routinely drop from well under a
+ * dollar straight to zero, so any threshold big enough to be worth having
+ * silently misses them. A cumulative counter has no legitimate reason to go
+ * down, so the magic number bought nothing and cost coverage.
  *
  * COST / SHAPE
  * ────────────
- * The ledger is append-only and already 32MB (162k lines, 126 distinct
- * agent+session keys). A full fold is ~800ms, which must NOT land on the
- * Electron main thread, so folding is async and INCREMENTAL: each pass reads
- * only the bytes appended since the last one and keeps the running segment
- * state. Steady-state cost per pass is a few hundred bytes.
+ * The ledger is append-only and grows without bound, so on an established
+ * floor a full fold takes long enough that it must NOT land on the Electron
+ * main thread. Folding is therefore async and INCREMENTAL: each pass reads only
+ * the bytes appended since the last one and keeps the running segment state.
+ * Steady-state cost per pass is a few hundred bytes regardless of ledger size.
  *
  * Read-only: this module never writes to the ledger.
  */

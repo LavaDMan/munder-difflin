@@ -14,6 +14,7 @@ const loadTs = require('./load-ts.cjs');
 
 const { buildWorkerLaunch } = loadTs('src/main/workerLaunch.ts');
 const { tokenizeCommand } = loadTs('src/shared/commandLine.ts');
+const { autoModeFlagForProvider } = loadTs('src/shared/agentProvider.ts');
 
 const launch = (over = {}) => buildWorkerLaunch({ autoMode: false, ...over });
 
@@ -62,7 +63,7 @@ test("auto-mode appends the PROVIDER'S flag, not claude's", () => {
   // A codex worker given --permission-mode would still stall at its first ask;
   // each provider's preset knows its own flag, same as the renderer's spawn path.
   const codex = launch({ requestCommand: 'codex', autoMode: true });
-  assert.deepEqual(codex.args, ['--dangerously-bypass-approvals-and-sandbox']);
+  assert.deepEqual(codex.args, ['-a', 'never', '-s', 'workspace-write']);
   const agy = launch({ requestCommand: 'agy', autoMode: true });
   assert.deepEqual(agy.args, ['--dangerously-skip-permissions']);
   const kimi = launch({ requestCommand: 'kimi', autoMode: true });
@@ -91,7 +92,7 @@ test('a multi-token auto flag appends whole, and the stance check is by token', 
 
 test("an explicit request provider picks that provider's flag for a custom binary", () => {
   const l = launch({ requestCommand: 'my-codex-wrapper', requestProvider: 'codex', autoMode: true });
-  assert.deepEqual(l.args, ['--dangerously-bypass-approvals-and-sandbox']);
+  assert.deepEqual(l.args, ['-a', 'never', '-s', 'workspace-write']);
 });
 
 test('a missing command falls back to the default, then to claude', () => {
@@ -108,7 +109,9 @@ test('main and renderer split with the SAME tokenizer (shared module)', () => {
 test('provider-only request selects its executable instead of the floor default', () => {
  const l = launch({requestProvider:'codex', defaultCommand:'claude', autoMode:true});
  assert.equal(l.bin, 'codex');
- assert.deepEqual(l.args,['--dangerously-bypass-approvals-and-sandbox']);
+ // The provider's own auto flag, not a literal: v0.4.6 moved codex from
+ // --dangerously-bypass-approvals-and-sandbox to `-a never -s workspace-write`.
+ assert.deepEqual(l.args, tokenizeCommand(autoModeFlagForProvider('codex')));
 });
 test('matching explicit provider preserves configured model and permission choices',()=>{
  const l=launch({requestProvider:'claude',defaultCommand:'claude --model opus --permission-mode bypassPermissions',autoMode:false});
