@@ -41,6 +41,9 @@ async function fixture(t) {
   const inputs = [];
   const beat = breakerBeat({ hive, usageProvider: telemetry, telemetry,
     ptyForAgent: () => 'synthetic-pty', lastCoordinationAt: () => Date.now(),
+    // upstream's breaker fix ("count work in the agent's own directory") reads
+    // progress through lastWorkAt() instead; keep both so the beat runs on either.
+    lastWorkAt: () => Date.now(),
     breaker: { tick: rows => { inputs.push(...rows); return []; } } });
   return { home, hive, hooks, telemetry, beat, inputs };
 }

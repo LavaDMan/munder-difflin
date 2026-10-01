@@ -469,19 +469,7 @@ function FloorTab({ seed }: { seed: { text: string; seq: number } }) {
       if (!killed.ok && !/^no pty:/.test(killed.error ?? '')) {
         throw new Error(killed.error ?? 'Could not stop the current process.');
       }
-      if (resume) {
-        // A blank xterm can retain corrupt renderer/DOM/subscription state even
-        // after its PTY is healthy. Throw that one terminal away, acquire its
-        // replacement BEFORE spawning (so startup output has a listener), then
-        // bump the key so React remounts only this agent's terminal card.
-        disposeTerminal(a.ptyId);
-        acquireTerminal(a.ptyId);
-        updateAgent(a.id, {
-          terminalGeneration: (a.terminalGeneration ?? 0) + 1,
-          status: 'idle',
-          action: 'recreating terminal…'
-        });
-      } else {
+      if (!resume) {
         resetTerminal(a.ptyId);
       }
       const command = buildSpawnCommand(cfg, model, provider);
@@ -511,6 +499,25 @@ function FloorTab({ seed }: { seed: { text: string; seq: number } }) {
       if (!res.ok) throw new Error(res.error ?? 'Restart failed.');
       if (resume && res.resumed !== true) {
         throw new Error('Resume was refused; no replacement session was accepted.');
+      }
+      if (resume) {
+        // The replacement is accepted, so NOW it is safe to throw the old
+        // terminal away. (It used to run BEFORE spawnPty, so one of the throws
+        // above left a fresh blank xterm in the pool with the scrollback gone
+        // forever — node-pty keeps none — and the label stuck at
+        // 'recreating terminal…'.) A blank xterm can retain corrupt
+        // renderer/DOM/subscription state even after its PTY is healthy, which
+        // is why the resume path replaces it at all; the spawn answer beat the
+        // CLI's first frame, so no startup output can be missed.
+        disposeTerminal(a.ptyId);
+        acquireTerminal(a.ptyId);
+        // Bump the key so React remounts only this agent's terminal card; the
+        // remount's attach re-requests a PTY redraw for anything it raced.
+        updateAgent(a.id, {
+          terminalGeneration: (a.terminalGeneration ?? 0) + 1,
+          status: 'idle',
+          action: 'recreating terminal…'
+        });
       }
       if (res.ok) {
         // Record the model even on a resume. A same-provider model change now
@@ -674,9 +681,18 @@ function FloorTab({ seed }: { seed: { text: string; seq: number } }) {
           const breaker = breakers[a.id];
           const armed = !!breaker && (breaker.level === 'constrained' || breaker.level === 'stopped');
           const tokens = sample ? sample.input + sample.output + sample.cacheRead + sample.cacheCreation : 0;
+          // The per-agent cap is measured in WORK tokens — input + output + cache
+          // writes, cache reads excluded (breaker.ts, #189) — so the meter against
+          // that cap reads the same figure; otherwise a cache-heavy agent shows a
+          // full red bar while the breaker is (correctly) calm. The floor budget
+          // sums all kinds, so its meter keeps `tokens`; the count beside the bar
+          // stays the all-kinds spend either way.
+          const workTokens = sample ? sample.input + sample.output + sample.cacheCreation : 0;
           const agentCap = agentTokenCaps[a.id]; // per-agent limit, if set
-          const denom = agentCap && agentCap > 0 ? agentCap : floorCap;
-          const pct = Math.min(100, Math.round((tokens / denom) * 100));
+          const hasAgentCap = !!agentCap && agentCap > 0;
+          const denom = hasAgentCap ? agentCap : floorCap;
+          const used = hasAgentCap ? workTokens : tokens;
+          const pct = Math.min(100, Math.round((used / denom) * 100));
           const meterColor = armed || pct >= 90 ? 'var(--cth-coral)' : pct >= 60 ? 'var(--cth-lemon)' : 'var(--cth-mint)';
           // Sparkline only when the agent is actually burning tokens; otherwise the
           // flat baseline is just a mystery line. Label it with the live rate.
@@ -735,9 +751,9 @@ function FloorTab({ seed }: { seed: { text: string; seq: number } }) {
               <span style={{ fontFamily: 'var(--cth-font-mono)', fontSize: 11, color: 'var(--cth-ink-900)', width: 56, textAlign: 'right' }}>{fmtTokens(tokens)}</span>
               <div
                 title={t('commandCenter.meterTitle', {
-                  used: tokens.toLocaleString(),
+                  used: used.toLocaleString(),
                   limit: denom.toLocaleString(),
-                  note: agentCap ? t('commandCenter.agentLimit') : t('commandCenter.floorBudget')
+                  note: hasAgentCap ? t('commandCenter.agentLimit') : t('commandCenter.floorBudget')
                 })}
                 style={{ width: 96, height: 8, background: 'var(--cth-cream-200)', boxShadow: 'inset 0 0 0 1px var(--cth-ink-300)', flexShrink: 0 }}
               >

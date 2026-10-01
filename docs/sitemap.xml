@@ -10,7 +10,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://munderdiffl.in/</loc>
-    <lastmod>2026-08-22</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
@@ -20,6 +20,198 @@
   <url><loc>https://munderdiffl.in/blog/</loc><changefreq>daily</changefreq><priority>0.9</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/</loc><changefreq>weekly</changefreq><priority>0.6</priority></url>
   <url><loc>https://munderdiffl.in/blog/about/</loc><changefreq>monthly</changefreq><priority>0.4</priority></url>
+  <url>
+    <loc>https://munderdiffl.in/blog/what-is-opencode/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/grok-bot-pricing/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/meta-muse-alternatives/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/meta-muse-grok-bot-privacy/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/meta-muse-vs-grok-bot/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/munder-difflin-0-5-3/</loc>
+    <lastmod>2026-09-26</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/indian-open-source-ai-projects-vs-big-tech/</loc>
+    <lastmod>2026-09-25</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/aider-vs-claude-code/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/build-your-personal-agi-on-your-computer/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-to-install-gemini-cli/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/is-ollama-good-for-coding/</loc>
+    <lastmod>2026-09-15</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/claude-code-max-plan-tips/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/claude-code-vs-antigravity/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/claude-code-vs-cursor/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/codex-max-plan-tips/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/connect-slack-to-munder-difflin/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/grok-bot-alternatives/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/herdr-alternatives/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-to-connect-ollama-to-claude-code/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-to-install-codex-cli/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/is-claude-code-max-worth-it/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/is-claude-code-open-source/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/omniagent-alternatives/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/what-is-vibe-coding/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/why-does-claude-code-keep-asking-for-permission/</loc>
+    <lastmod>2026-09-14</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-to-use-claude-code-plan-mode/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/what-is-an-mcp-server/</loc>
+    <lastmod>2026-09-11</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/codex-cli-vs-claude-code/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-much-does-claude-code-cost/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/how-to-add-an-mcp-server-to-claude-code/</loc>
+    <lastmod>2026-09-29</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/launching-munder-difflin-v0-5-2/</loc>
+    <lastmod>2026-09-10</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://munderdiffl.in/blog/launching-munder-difflin-v0-4-6/</loc>
+    <lastmod>2026-08-27</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
   <url>
     <loc>https://munderdiffl.in/blog/the-spend-counter-that-went-back-to-zero/</loc>
     <lastmod>2026-08-22</lastmod>
@@ -106,13 +298,13 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/qm-vs-munder-difflin/</loc>
-    <lastmod>2026-08-06</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/command-center-guide/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -136,7 +328,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/how-to-hire-from-the-agent-gallery/</loc>
-    <lastmod>2026-07-03</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -208,7 +400,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/your-first-hour-with-munder-difflin/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-14</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -220,13 +412,13 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/run-munder-difflin-on-a-mac-mini/</loc>
-    <lastmod>2026-06-22</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/run-munder-difflin-on-open-models/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -256,7 +448,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/deploy-a-blog-writer-agent/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -322,7 +514,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/best-ai-coding-agents/</loc>
-    <lastmod>2026-06-05</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -346,7 +538,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/how-to-install-and-use-munder-difflin/</loc>
-    <lastmod>2026-08-20</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -388,7 +580,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/best-claude-code-multi-agent-tools/</loc>
-    <lastmod>2026-06-04</lastmod>
+    <lastmod>2026-09-10</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -610,7 +802,7 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/claude-code-hooks-explained/</loc>
-    <lastmod>2026-06-03</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
@@ -790,152 +982,22 @@
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/claude-code-subagents-vs-multi-agent-harness/</loc>
-    <lastmod>2026-05-23</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url>
     <loc>https://munderdiffl.in/blog/what-is-a-multi-agent-harness/</loc>
-    <lastmod>2026-05-22</lastmod>
+    <lastmod>2026-09-29</lastmod>
     <changefreq>monthly</changefreq>
     <priority>0.8</priority>
   </url>
   <url><loc>https://munderdiffl.in/blog/topics/guides/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
+  <url><loc>https://munderdiffl.in/blog/topics/comparisons/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/concepts/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/internals/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://munderdiffl.in/blog/topics/comparisons/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/story/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/orchestration/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/use-cases/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
   <url><loc>https://munderdiffl.in/blog/topics/memory/</loc><changefreq>weekly</changefreq><priority>0.5</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/multi-agent/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/claude-code/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/internals/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/guides/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/open-source/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/orchestration/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/concepts/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/comparisons/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/story/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/local-first/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/release/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/automation/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/use-cases/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/tools/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/getting-started/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/memory/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/cost/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/workflow/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/human-in-the-loop/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/security/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/mempalace/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/hive/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/observability/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/guardrails/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/electron/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/autonomous/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/git/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/mcp/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/architecture/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/reliability/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/debugging/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/cli-agents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/voice/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ide/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/terminals/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/model-routing/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/agentic-ai/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/aeo/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/seo/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/engines/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/launch/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/god/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/messaging/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/faq/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/concurrency/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/pixijs/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/visualization/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/xtermjs/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/hooks/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/skills/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/node-pty/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/performance/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/prompt-caching/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/slack/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/protocols/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/tutorial/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/codex/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/code-review/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/agent-design/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/windows/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/postmortem/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/community/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/subagents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/markdown/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/coordination/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/event-log/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/glossary/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/privacy/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/game-dev/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/error-handling/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/context-engineering/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/evaluation/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ai-search/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/cloud-agents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/long-running-agents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/trends/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/trust/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/prompt-injection/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/coding-agents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/hitl/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/brand/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/the-office/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/munder-difflin/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/devrel/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/industry/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/interoperability/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ai-coding-agents/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/cline/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/geo/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/video/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/content/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/setup/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/github/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/webhooks/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/command-injection/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ssrf/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/mac-mini/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ollama/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/lm-studio/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/byok/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/realtime/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/command-center/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/kanban/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/crewai/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/autogen/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/langgraph/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/copilot-cli/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/github-copilot/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/talk-mode/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/copilot/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/autonomy/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/orca/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/monaco-ide/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/tmux/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/git-worktrees/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/ade/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/tooling-landscape/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/harness-engineering/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/onboarding/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/research/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/design/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/eleventy/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/meta/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/product-hunt/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/changelog/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/feedback/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/product/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/discord/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/reddit/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
-  <url><loc>https://munderdiffl.in/blog/tags/telemetry/</loc><changefreq>weekly</changefreq><priority>0.3</priority></url>
 </urlset>

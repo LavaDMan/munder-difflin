@@ -13,7 +13,9 @@ const {
   CODEX_REMOTE_SOCKET_RELATIVE
 } = loadTs(process.env.MUNDER_TEST_SOURCE_ROOT ? require('node:path').join(process.env.MUNDER_TEST_SOURCE_ROOT, 'src/shared/codexRemote.ts') : 'src/shared/codexRemote.ts');
 
-test('Codex remote uses a short stable per-agent home alias', () => {
+test('Codex remote uses a short stable per-agent home alias', {
+  skip: process.platform === 'win32' ? 'Codex remote uses Unix sockets and is disabled on Windows' : false
+}, () => {
   const first = codexRemoteAliasPath('/very/long/hive/agent/.codex', 'dev-1', '/tmp');
   const again = codexRemoteAliasPath('/very/long/hive/agent/.codex', 'dev-1', '/tmp');
   const other = codexRemoteAliasPath('/very/long/hive/agent/.codex', 'dev-2', '/tmp');
