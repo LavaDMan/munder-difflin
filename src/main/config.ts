@@ -310,6 +310,12 @@ export interface HarnessConfig {
    *  without an injected key and environments with DO_NOT_TRACK set never send
    *  regardless of this flag. (Mirrored in preload + renderer config.) */
   telemetryEnabled?: boolean;
+  /** Fetch the agent model presets from the project's published
+   *  docs/model-catalog.json (cached, refreshed after a TTL) so new models reach
+   *  installed copies without a release. Default ON. When false the app makes no
+   *  request for it and uses the last cached copy, else the catalog baked into
+   *  the build. */
+  remoteModelCatalog?: boolean;
   /** Master flag for the TV-show office themes feature (Settings theme picker +
    *  destructive switch flow). Default false = the picker is hidden and the
    *  office renders as today (zero behavior change). */
@@ -447,6 +453,7 @@ const DEFAULTS: HarnessConfig = {
   strongKeepalive: false,
   autoUpdate: true,
   telemetryEnabled: true,
+  remoteModelCatalog: true,
   multiWindow: true,
   tvShowOffices: false,
   officeTheme: 'office',

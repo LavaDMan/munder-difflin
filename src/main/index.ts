@@ -3611,7 +3611,7 @@ ipcMain.handle('hero:payload', async (_evt, force: unknown) =>
  *  shared/modelCatalogPayload; a null catalog means "keep the baked one". */
 const MODEL_CATALOG_CACHE = () => join(app.getPath('userData'), 'model-catalog.json');
 ipcMain.handle('models:catalog', async (_evt, force: unknown) =>
-  loadModelCatalog(MODEL_CATALOG_CACHE(), { force: force === true }));
+  loadModelCatalog(MODEL_CATALOG_CACHE(), { force: force === true, remote: readConfig().remoteModelCatalog !== false }));
 
 // ─── IPC: skills (installed locally, and the browsable catalog) ─────────────
 /** Skills the CLIs on this machine can already use. Scans the registered repos
@@ -5371,7 +5371,7 @@ app.whenReady().then(() => {
   // the same cache over IPC on load; doing the network hop here means the file
   // is already fresh on disk by the time a modal is opened, and a failure is
   // silent by construction (the baked catalog is the floor).
-  void loadModelCatalog(MODEL_CATALOG_CACHE()).catch(() => { /* never fatal */ });
+  void loadModelCatalog(MODEL_CATALOG_CACHE(), { remote: readConfig().remoteModelCatalog !== false }).catch(() => { /* never fatal */ });
 
   // A cold-start deep link (Windows/Linux) rides in on OUR argv.
   const startupHireLink = process.argv.find((a) => a.startsWith('munderdifflin://'));

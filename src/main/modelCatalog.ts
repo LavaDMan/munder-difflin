@@ -35,7 +35,7 @@ export interface RemoteCatalogResult {
 
 export async function loadModelCatalog(
   cachePath: string,
-  opts: { force?: boolean } = {}
+  opts: { force?: boolean; remote?: boolean } = {}
 ): Promise<RemoteCatalogResult> {
   let cached: { catalog: ModelCatalog; fetchedAt: number } | null = null;
   try {
@@ -50,6 +50,13 @@ export async function loadModelCatalog(
       }
     }
   } catch { cached = null; }
+
+  // remoteModelCatalog: false — never touch the network. Serve whatever was
+  // cached before the switch was turned off, else null (the baked catalog).
+  if (opts.remote === false) {
+    if (cached) return { catalog: cached.catalog, fetchedAt: cached.fetchedAt, stale: Date.now() - cached.fetchedAt >= TTL_MS };
+    return { catalog: null, fetchedAt: 0, stale: true };
+  }
 
   if (cached && !opts.force && Date.now() - cached.fetchedAt < TTL_MS) {
     return { catalog: cached.catalog, fetchedAt: cached.fetchedAt, stale: false };
