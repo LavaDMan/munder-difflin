@@ -11,6 +11,8 @@
  *
  *   node test/run-sandboxed.cjs                 # every test/*.test.cjs
  *   node test/run-sandboxed.cjs test/a.test.cjs # just these
+ *   node test/run-sandboxed.cjs --test-concurrency=8 [files]
+ *                                               # --flags go to `node --test`
  */
 const fs = require('node:fs');
 const os = require('node:os');
@@ -20,8 +22,13 @@ const { spawnSync } = require('node:child_process');
 const realHome = os.homedir();
 const sandbox = fs.mkdtempSync(path.join(os.tmpdir(), 'md-test-home-'));
 
-const files = process.argv.length > 2
-  ? process.argv.slice(2)
+// node --test runs one file per core by default; on a many-core host that alone
+// can exhaust memory, so let the caller pass --test-concurrency and friends.
+const args = process.argv.slice(2);
+const flags = args.filter((a) => a.startsWith('--'));
+const named = args.filter((a) => !a.startsWith('--'));
+const files = named.length
+  ? named
   : fs.readdirSync(__dirname)
     .filter((f) => f.endsWith('.test.cjs'))
     .sort()
@@ -40,7 +47,7 @@ for (const k of ['XDG_CONFIG_HOME', 'XDG_DATA_HOME', 'XDG_STATE_HOME', 'XDG_CACH
 
 let status = 1;
 try {
-  const r = spawnSync(process.execPath, ['--test', ...files], {
+  const r = spawnSync(process.execPath, ['--test', ...flags, ...files], {
     cwd: path.resolve(__dirname, '..'),
     env,
     stdio: 'inherit',
