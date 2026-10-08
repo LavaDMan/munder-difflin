@@ -1,8 +1,29 @@
 'use strict';
 
 const fs = require('node:fs');
+const os = require('node:os');
 const path = require('node:path');
 const ts = require('typescript');
+
+// Product code writes agent config under os.homedir() (ensureAgent, the
+// install*Hooks installers). Refuse to load it while HOME is the developer's real
+// home, so a test that forgot to redirect HOME fails here instead of rewriting
+// live config. `npm run test:focused` (test/run-sandboxed.cjs) supplies a
+// throwaway HOME; a single file runs the same way: node test/run-sandboxed.cjs <file>.
+const realHome = (() => {
+  try {
+    return os.userInfo().homedir;
+  } catch {
+    return process.env.MUNDER_TEST_REAL_HOME;
+  }
+})();
+if (realHome && path.resolve(os.homedir()) === path.resolve(realHome)) {
+  throw new Error(
+    `test/load-ts.cjs: HOME is the real home directory (${realHome}). Tests that load ` +
+      'product code can write agent config there. Run them through `npm run test:focused` ' +
+      'or `node test/run-sandboxed.cjs <file>`.',
+  );
+}
 
 const cache = new Map();
 
